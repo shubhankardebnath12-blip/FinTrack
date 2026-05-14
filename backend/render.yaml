@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: fintrack-backend
+    env: node
+    region: oregon   # closest region to most users; change to frankfurt/singapore if needed
+    plan: free       # upgrade to starter ($7/mo) for no spin-down
+
+    # Build & start
+    buildCommand: npm install
+    startCommand: node server.js
+
+    # Health-check path so Render knows when the service is ready
+    healthCheckPath: /health
+
+    # Auto-deploy on push to main
+    autoDeploy: true
+    branch: main
+
+    # Environment variables (set the VALUES in the Render dashboard — do NOT commit secrets here)
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000          # Render exposes apps on 10000 internally
+      - key: MONGODB_URI
+        sync: false           # mark as secret — must be set in dashboard
+      - key: JWT_SECRET
+        sync: false           # mark as secret — must be set in dashboard
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: FRONTEND_URL
+        sync: false           # set to your Vercel URL in dashboard

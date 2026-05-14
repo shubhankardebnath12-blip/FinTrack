@@ -1,0 +1,141 @@
+{
+  "folders": [
+    {
+      "name": "FinTrack — Root",
+      "path": "."
+    },
+    {
+      "name": "Frontend (React + Vite)",
+      "path": "./frontend"
+    },
+    {
+      "name": "Backend (Node + Express)",
+      "path": "./backend"
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    "editor.minimap.enabled": false,
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.git": true,
+      "**/dist": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true
+    },
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "css.validate": false,
+    "tailwindCSS.includeLanguages": {
+      "javascript": "javascript",
+      "html": "HTML"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "bradlc.vscode-tailwindcss",
+      "dsznajder.es7-react-js-snippets",
+      "ms-vscode.vscode-node-pack",
+      "formulahendry.auto-rename-tag",
+      "naumovs.color-highlight",
+      "pkief.material-icon-theme",
+      "ms-azuretools.vscode-docker",
+      "christian-kohler.path-intellisense"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Launch Backend",
+        "cwd": "${workspaceFolder:Backend (Node + Express)}",
+        "program": "${workspaceFolder:Backend (Node + Express)}/server.js",
+        "envFile": "${workspaceFolder:Backend (Node + Express)}/.env",
+        "restart": true,
+        "console": "integratedTerminal"
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Start Backend",
+        "type": "shell",
+        "command": "npm run dev",
+        "options": {
+          "cwd": "${workspaceFolder:Backend (Node + Express)}"
+        },
+        "group": "build",
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated",
+          "tab": "Backend"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "Start Frontend",
+        "type": "shell",
+        "command": "npm run dev",
+        "options": {
+          "cwd": "${workspaceFolder:Frontend (React + Vite)}"
+        },
+        "group": "build",
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated",
+          "tab": "Frontend"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "Start FinTrack (Both)",
+        "dependsOn": ["Start Backend", "Start Frontend"],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "Install All Dependencies",
+        "type": "shell",
+        "command": "cd backend && npm install && cd ../frontend && npm install",
+        "options": {
+          "cwd": "${workspaceFolder:FinTrack — Root}"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        },
+        "problemMatcher": []
+      }
+    ]
+  }
+}

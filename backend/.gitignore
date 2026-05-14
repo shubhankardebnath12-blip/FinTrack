@@ -1,0 +1,23 @@
+# ==== Backend .gitignore ====
+
+# Dependencies
+node_modules/
+
+# Environment secrets — NEVER commit these
+.env
+.env.local
+.env.production
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Runtime
+.DS_Store
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
