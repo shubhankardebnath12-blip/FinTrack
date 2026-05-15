@@ -6,7 +6,7 @@ const buildApiBaseUrl = () => {
     return 'http://localhost:5000/api';
   }
 
-  const normalized = rawUrl.replace(/\/+$, '');
+  const normalized = rawUrl.replace(/\/+$/, '');
   return normalized.endsWith('/api') ? normalized : `${normalized}/api`;
 };
 
