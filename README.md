@@ -46,6 +46,8 @@ FRONTEND_URL=http://localhost:5173
 VITE_API_URL=http://localhost:5001/api
 ```
 
+`VITE_API_URL` may be set to your deployed backend root URL or your backend root URL plus `/api`; the frontend will normalize it automatically.
+
 ### Step 3 — Start
 
 | Service | URL | Command |
