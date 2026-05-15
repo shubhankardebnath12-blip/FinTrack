@@ -10,6 +10,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Sparkles,
+  X,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -70,6 +71,12 @@ const Sidebar = ({ collapsed, onToggle }) => {
             <ChevronLeft size={15} />
           </button>
         )}
+        <button
+          onClick={onToggle}
+          className="btn-icon lg:hidden flex-shrink-0 ml-auto"
+        >
+          <X size={15} />
+        </button>
         {collapsed && (
           <button
             onClick={onToggle}

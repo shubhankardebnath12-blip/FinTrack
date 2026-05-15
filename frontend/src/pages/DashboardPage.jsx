@@ -73,7 +73,7 @@ const DashboardPage = () => {
               <span className="text-xs font-semibold text-white/50 uppercase tracking-wider">Overview</span>
             </div>
             <h2
-              className="text-2xl font-bold text-white leading-tight"
+              className="text-xl sm:text-2xl font-bold text-white leading-tight"
               style={{ letterSpacing: '-0.03em' }}
             >
               Good day, {user?.name?.split(' ')[0]} 👋
@@ -103,7 +103,7 @@ const DashboardPage = () => {
       </div>
 
       {/* ── Stat cards ── */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Net Balance"    value={formatCurrency(summary?.balance || 0, currency)}      icon={Wallet}      color="primary" subtitle="All time"   loading={statsLoading} index={0} />
         <StatCard title="Total Income"   value={formatCurrency(summary?.totalIncome || 0, currency)}  icon={TrendingUp}  color="success" subtitle="All time"   loading={statsLoading} index={1} />
         <StatCard title="Total Expenses" value={formatCurrency(summary?.totalExpense || 0, currency)} icon={TrendingDown} color="danger" subtitle="All time"   loading={statsLoading} index={2} />

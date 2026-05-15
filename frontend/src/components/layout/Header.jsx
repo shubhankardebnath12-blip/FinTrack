@@ -23,7 +23,7 @@ const Header = ({ title, onMenuToggle, onAddTransaction }) => {
       <div className="flex items-center gap-3">
         <button
           onClick={onMenuToggle}
-          className="btn-icon lg:hidden"
+          className="btn-icon lg:hidden flex-shrink-0"
           aria-label="Toggle menu"
         >
           <Menu size={19} />
@@ -48,14 +48,14 @@ const Header = ({ title, onMenuToggle, onAddTransaction }) => {
         {onAddTransaction && (
           <button
             onClick={onAddTransaction}
-            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white transition-all duration-200 hover:opacity-90 active:scale-95"
+            className="flex items-center justify-center gap-2 w-9 h-9 sm:w-auto sm:h-auto sm:px-4 sm:py-2 rounded-xl text-sm font-semibold text-white transition-all duration-200 hover:opacity-90 active:scale-95"
             style={{
               background: 'linear-gradient(135deg, #6366f1 0%, #7c3aed 100%)',
               boxShadow: '0 0 20px rgba(99,102,241,0.3), inset 0 1px 0 rgba(255,255,255,0.15)',
             }}
           >
-            <Plus size={15} strokeWidth={2.5} />
-            <span>Add</span>
+            <Plus size={16} strokeWidth={2.5} />
+            <span className="hidden sm:block">Add</span>
           </button>
         )}
 

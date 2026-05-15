@@ -60,8 +60,7 @@ const AppLayout = () => {
 
       {/* Main content */}
       <main
-        className="flex flex-col min-h-screen transition-all duration-300 ease-smooth"
-        style={{ marginLeft: `max(0px, ${sidebarW})` }}
+        className={`flex flex-col min-h-screen transition-all duration-300 ease-smooth main-content-wrapper ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}
       >
         <Header
           title={title}
@@ -71,8 +70,8 @@ const AppLayout = () => {
 
         {/* Page content */}
         <div
-          className="flex-1 overflow-auto"
-          style={{ padding: '28px 28px 88px', minHeight: 0 }}
+          className="flex-1 overflow-auto p-4 sm:p-7 pb-24 sm:pb-28"
+          style={{ minHeight: 0 }}
         >
           <Outlet context={{ setShowAddModal }} />
         </div>

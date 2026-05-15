@@ -39,7 +39,7 @@ const MobileNav = () => {
           >
             <Icon
               size={18}
-              className="transition-colors duration-200"
+              className="transition-colors duration-200 flex-shrink-0"
               style={{ color: active ? '#818cf8' : 'rgba(255,255,255,0.35)' }}
             />
             <span

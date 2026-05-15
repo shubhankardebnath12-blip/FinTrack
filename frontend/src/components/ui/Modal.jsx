@@ -22,18 +22,17 @@ const Modal = ({ isOpen, onClose, title, children, footer, size = 'md' }) => {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
       style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(12px)' }}
       onClick={(e) => { if (e.target === overlayRef.current) onClose(); }}
     >
       <div
-        className="w-full animation-scale-in flex flex-col"
+        className="w-full h-[95vh] sm:h-auto animation-scale-in flex flex-col rounded-t-[24px] sm:rounded-[24px]"
         style={{
           maxWidth: widths[size] || widths.md,
-          maxHeight: '90vh',
+          maxHeight: '95vh',
           background: 'linear-gradient(180deg, #0f1520 0%, #0a0f18 100%)',
           border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: '24px',
           boxShadow: '0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(99,102,241,0.06), inset 0 1px 0 rgba(255,255,255,0.06)',
         }}
       >
