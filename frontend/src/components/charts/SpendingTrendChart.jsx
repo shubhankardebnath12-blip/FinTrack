@@ -1,8 +1,9 @@
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from 'recharts';
+import { formatCurrency } from '../../utils/helpers';
 
-const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({ active, payload, label, currency }) => {
   if (!active || !payload?.length) return null;
   return (
     <div
@@ -15,15 +16,15 @@ const CustomTooltip = ({ active, payload, label }) => {
     >
       <p className="text-[10px] text-white/35 mb-1.5 font-medium">{label}</p>
       <p className="text-sm font-bold text-white">
-        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(payload[0]?.value || 0)}
+        {formatCurrency(payload[0]?.value || 0, currency)}
       </p>
     </div>
   );
 };
 
-const SpendingTrendChart = ({ data = [] }) => (
+const SpendingTrendChart = ({ data = [], currency = 'USD' }) => (
   <div
-    className="rounded-2xl p-6 animate-in"
+    className="rounded-2xl p-5 sm:p-6 animate-in"
     style={{
       background: 'rgba(255,255,255,0.025)',
       border: '1px solid rgba(255,255,255,0.07)',
@@ -32,10 +33,9 @@ const SpendingTrendChart = ({ data = [] }) => (
   >
     <div className="flex items-center justify-between mb-6">
       <div>
-        <h3 className="text-sm font-bold text-white">Spending Trend</h3>
-        <p className="text-[11px] text-white/30 mt-0.5">30-day rolling expenses</p>
+        <h3 className="text-sm font-bold" style={{ color: 'var(--color-text)' }}>Spending Trend</h3>
+        <p className="text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>30-day rolling expenses</p>
       </div>
-
       {data.length > 0 && (
         <div
           className="text-xs font-semibold px-3 py-1.5 rounded-xl"
@@ -82,7 +82,10 @@ const SpendingTrendChart = ({ data = [] }) => (
             tickFormatter={(v) => v >= 1000 ? `${(v/1000).toFixed(1)}k` : v}
             width={36}
           />
-          <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'rgba(99,102,241,0.3)', strokeWidth: 1, strokeDasharray: '4 4' }} />
+          <Tooltip
+            content={(props) => <CustomTooltip {...props} currency={currency} />}
+            cursor={{ stroke: 'rgba(99,102,241,0.3)', strokeWidth: 1, strokeDasharray: '4 4' }}
+          />
           <Area
             type="monotone"
             dataKey="amount"

@@ -1,9 +1,10 @@
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer,
 } from 'recharts';
+import { formatCurrency } from '../../utils/helpers';
 
-const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({ active, payload, label, currency }) => {
   if (!active || !payload?.length) return null;
   return (
     <div
@@ -20,7 +21,7 @@ const CustomTooltip = ({ active, payload, label }) => {
           <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: entry.fill }} />
           <span className="text-xs text-white/50 capitalize">{entry.name}:</span>
           <span className="text-sm font-bold text-white">
-            {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(entry.value)}
+            {formatCurrency(entry.value, currency)}
           </span>
         </div>
       ))}
@@ -28,9 +29,9 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-const MonthlyBarChart = ({ data = [], currency = '$' }) => (
+const MonthlyBarChart = ({ data = [], currency = 'USD' }) => (
   <div
-    className="rounded-2xl p-6 animate-in"
+    className="rounded-2xl p-5 sm:p-6 animate-in"
     style={{
       background: 'rgba(255,255,255,0.025)',
       border: '1px solid rgba(255,255,255,0.07)',
@@ -39,8 +40,8 @@ const MonthlyBarChart = ({ data = [], currency = '$' }) => (
   >
     <div className="flex items-center justify-between mb-6">
       <div>
-        <h3 className="text-sm font-bold text-white">Monthly Overview</h3>
-        <p className="text-[11px] text-white/30 mt-0.5">Income vs Expenses by month</p>
+        <h3 className="text-sm font-bold" style={{ color: 'var(--color-text)' }}>Monthly Overview</h3>
+        <p className="text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>Income vs Expenses by month</p>
       </div>
       <div className="flex items-center gap-4">
         {[
@@ -49,7 +50,7 @@ const MonthlyBarChart = ({ data = [], currency = '$' }) => (
         ].map(({ label, color }) => (
           <div key={label} className="flex items-center gap-1.5">
             <div className="w-2 h-2 rounded-full" style={{ background: color }} />
-            <span className="text-[10px] text-white/40 font-medium">{label}</span>
+            <span className="text-[10px] font-medium" style={{ color: 'var(--color-text-muted)' }}>{label}</span>
           </div>
         ))}
       </div>
@@ -82,7 +83,10 @@ const MonthlyBarChart = ({ data = [], currency = '$' }) => (
           tickFormatter={(v) => v >= 1000 ? `${(v/1000).toFixed(0)}k` : v}
           width={36}
         />
-        <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255,255,255,0.03)', radius: 8 }} />
+        <Tooltip
+          content={(props) => <CustomTooltip {...props} currency={currency} />}
+          cursor={{ fill: 'rgba(255,255,255,0.03)', radius: 8 }}
+        />
         <Bar dataKey="income" fill="url(#incomeGrad)" radius={[5, 5, 0, 0]} maxBarSize={28} name="income" />
         <Bar dataKey="expense" fill="url(#expenseGrad)" radius={[5, 5, 0, 0]} maxBarSize={28} name="expense" />
       </BarChart>

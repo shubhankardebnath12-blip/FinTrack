@@ -52,8 +52,8 @@ const SectionHeader = ({ icon: Icon, label, desc, iconBg, iconColor }) => (
       <Icon size={18} className={iconColor} />
     </div>
     <div>
-      <h3 className="text-base font-semibold text-white">{label}</h3>
-      <p className="text-xs text-white/40">{desc}</p>
+      <h3 className="text-base font-semibold" style={{ color: 'var(--color-text)' }}>{label}</h3>
+      <p className="text-xs mt-0.5" style={{ color: 'var(--color-text-muted)' }}>{desc}</p>
     </div>
   </div>
 );

@@ -70,15 +70,15 @@ const DashboardPage = () => {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <Zap size={14} className="text-yellow-400" />
-              <span className="text-xs font-semibold text-white/50 uppercase tracking-wider">Overview</span>
+              <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--color-text-muted)' }}>Overview</span>
             </div>
             <h2
-              className="text-xl sm:text-2xl font-bold text-white leading-tight"
-              style={{ letterSpacing: '-0.03em' }}
+              className="text-xl sm:text-2xl font-bold leading-tight"
+              style={{ letterSpacing: '-0.03em', color: 'var(--color-text)' }}
             >
               Good day, {user?.name?.split(' ')[0]} 👋
             </h2>
-            <p className="text-sm text-white/40 mt-1.5 max-w-xs">
+            <p className="text-sm mt-1.5 max-w-xs" style={{ color: 'var(--color-text-muted)' }}>
               Your finances are looking{' '}
               <span className="font-medium" style={{ color: savingsRateNum >= 30 ? '#4ade80' : savingsRateNum >= 10 ? '#fbbf24' : '#f87171' }}>
                 {savingsRateNum >= 30 ? 'excellent' : savingsRateNum >= 10 ? 'good' : 'needs attention'}
@@ -188,7 +188,7 @@ const DashboardPage = () => {
         <div className="xl:col-span-2 animate-in animate-in-delay-2">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <h3 className="text-sm font-bold text-white">Recent Transactions</h3>
+              <h3 className="text-sm font-bold" style={{ color: 'var(--color-text)' }}>Recent Transactions</h3>
               {recentTransactions.length > 0 && (
                 <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
                   style={{ background: 'rgba(99,102,241,0.15)', color: '#818cf8', border: '1px solid rgba(99,102,241,0.2)' }}>

@@ -5,7 +5,7 @@ import MonthlyBarChart from '../components/charts/MonthlyBarChart';
 import CategoryPieChart from '../components/charts/CategoryPieChart';
 import SpendingTrendChart from '../components/charts/SpendingTrendChart';
 import Card from '../components/ui/Card';
-import { CURRENCY_SYMBOLS, CATEGORY_MAP } from '../utils/constants';
+import { CATEGORY_MAP } from '../utils/constants';
 import { formatCurrency } from '../utils/helpers';
 import { Select } from '../components/ui/Input';
 
@@ -25,7 +25,7 @@ const AnalyticsPage = () => {
   const [year, setYear] = useState(String(currentYear));
   const [loading, setLoading] = useState(true);
 
-  const currency = CURRENCY_SYMBOLS[user?.currency] || '$';
+  const currency = user?.currency || 'USD';
 
   useEffect(() => {
     const load = async () => {
@@ -53,8 +53,8 @@ const AnalyticsPage = () => {
       {/* Year selector */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-base font-semibold text-white">Financial Analytics</h3>
-          <p className="text-xs text-white/40 mt-0.5">Interactive charts and insights</p>
+          <h3 className="text-base font-semibold" style={{ color: 'var(--color-text)' }}>Financial Analytics</h3>
+          <p className="text-xs mt-0.5" style={{ color: 'var(--color-text-muted)' }}>Interactive charts and insights</p>
         </div>
         <div className="w-32">
           <Select
@@ -86,7 +86,7 @@ const AnalyticsPage = () => {
 
       {/* Category pie + top category */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <CategoryPieChart data={categories} />
+        <CategoryPieChart data={categories} currency={currency} />
 
         {/* Top spending category insight */}
         <Card className="p-6">

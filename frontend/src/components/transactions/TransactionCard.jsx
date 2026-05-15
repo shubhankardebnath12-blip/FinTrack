@@ -20,21 +20,21 @@ const TransactionCard = ({ transaction, onEdit, onDelete, index = 0 }) => {
 
   return (
     <div
-      className="group relative flex items-center gap-4 px-4 py-3.5 rounded-2xl animate-in"
+      className="group relative flex items-center gap-3 sm:gap-4 px-4 py-3.5 rounded-2xl animate-in"
       style={{
-        background: 'rgba(255,255,255,0.025)',
-        border: '1px solid rgba(255,255,255,0.06)',
+        background: 'var(--color-card-bg)',
+        border: '1px solid var(--color-card-border)',
         transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
         animationDelay: `${index * 40}ms`,
       }}
       onMouseEnter={e => {
-        e.currentTarget.style.background = 'rgba(255,255,255,0.045)';
+        e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
         e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
         e.currentTarget.style.transform = 'translateX(2px)';
       }}
       onMouseLeave={e => {
-        e.currentTarget.style.background = 'rgba(255,255,255,0.025)';
-        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
+        e.currentTarget.style.background = 'var(--color-card-bg)';
+        e.currentTarget.style.borderColor = 'var(--color-card-border)';
         e.currentTarget.style.transform = 'translateX(0)';
       }}
     >
@@ -48,38 +48,38 @@ const TransactionCard = ({ transaction, onEdit, onDelete, index = 0 }) => {
       <div
         className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
         style={{
-          background: catData?.bgColor
-            ? catData.bgColor.replace(')', ', 0.15)').replace('rgba(', 'rgba(')
-            : 'rgba(255,255,255,0.06)',
+          background: catData?.bgColor || 'rgba(255,255,255,0.06)',
           border: '1px solid rgba(255,255,255,0.08)',
         }}
       >
-        {catData?.icon || '💸'}
+        {catData?.icon || '\uD83D\uDCB8'}
       </div>
 
       {/* Content */}
       <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2">
-          <p className="text-sm font-semibold text-white/90 truncate">{transaction.title}</p>
-        </div>
-        <div className="flex items-center gap-2 mt-1">
+        <p className="text-sm font-semibold truncate" style={{ color: 'var(--color-text)' }}>
+          {transaction.title}
+        </p>
+        <div className="flex items-center gap-2 mt-1 flex-wrap">
           <span
             className="text-[10px] font-semibold px-2 py-0.5 rounded-md"
             style={{
-              background: catData?.bgColor?.replace(')', ', 0.12)') || 'rgba(255,255,255,0.06)',
+              background: catData?.bgColor || 'rgba(255,255,255,0.06)',
               color: catData?.color || '#94a3b8',
               border: `1px solid ${catData?.color ? catData.color + '30' : 'rgba(255,255,255,0.08)'}`,
             }}
           >
             {catData?.icon} {transaction.category}
           </span>
-          <span className="text-[10px] text-white/25">•</span>
-          <span className="text-[11px] text-white/35">{formatRelativeDate(transaction.date)}</span>
+          <span style={{ color: 'var(--color-text-muted)', fontSize: '10px' }}>•</span>
+          <span className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
+            {formatRelativeDate(transaction.date)}
+          </span>
         </div>
       </div>
 
-      {/* Amount */}
-      <div className="flex items-center gap-3">
+      {/* Amount + Actions */}
+      <div className="flex items-center gap-2 flex-shrink-0">
         <div className="text-right">
           <div className="flex items-center gap-1 justify-end">
             {isIncome
@@ -91,24 +91,34 @@ const TransactionCard = ({ transaction, onEdit, onDelete, index = 0 }) => {
             </p>
           </div>
           {transaction.note && (
-            <p className="text-[10px] text-white/25 mt-0.5 truncate max-w-[100px]">{transaction.note}</p>
+            <p className="text-[10px] mt-0.5 truncate max-w-[80px]" style={{ color: 'var(--color-text-muted)' }}>
+              {transaction.note}
+            </p>
           )}
         </div>
 
-        {/* Actions */}
-        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-x-2 group-hover:translate-x-0">
+        {/* Actions — always visible, 44px touch targets on mobile */}
+        <div className="flex items-center gap-0.5">
           <button
             onClick={() => onEdit(transaction)}
-            className="w-7 h-7 rounded-lg flex items-center justify-center text-white/30 hover:text-primary-400 hover:bg-primary-500/10 transition-all duration-150"
+            className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-150 active:scale-90"
+            style={{ color: 'var(--color-text-muted)' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#818cf8'; e.currentTarget.style.background = 'rgba(99,102,241,0.1)'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'var(--color-text-muted)'; e.currentTarget.style.background = 'transparent'; }}
+            aria-label="Edit transaction"
           >
-            <Edit2 size={12} />
+            <Edit2 size={13} />
           </button>
           <button
             onClick={handleDelete}
             disabled={deleting}
-            className="w-7 h-7 rounded-lg flex items-center justify-center text-white/30 hover:text-danger-400 hover:bg-danger-500/10 transition-all duration-150 disabled:opacity-40"
+            className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-150 active:scale-90 disabled:opacity-40"
+            style={{ color: 'var(--color-text-muted)' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#f87171'; e.currentTarget.style.background = 'rgba(239,68,68,0.1)'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'var(--color-text-muted)'; e.currentTarget.style.background = 'transparent'; }}
+            aria-label="Delete transaction"
           >
-            <Trash2 size={12} />
+            <Trash2 size={13} />
           </button>
         </div>
       </div>

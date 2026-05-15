@@ -145,7 +145,7 @@ const TransactionForm = ({ isOpen, onClose, editData = null, onSuccess }) => {
           error={errors.title}
         />
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Input
             label="Amount"
             name="amount"

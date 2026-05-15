@@ -187,13 +187,13 @@ const TransactionsPage = () => {
       )}
 
       {/* Sort bar */}
-      <div className="flex items-center gap-2 text-xs text-white/40">
-        <span>Sort by:</span>
+      <div className="flex items-center gap-2 text-xs overflow-x-auto no-scrollbar pb-1" style={{ color: 'var(--color-text-muted)' }}>
+        <span className="flex-shrink-0">Sort by:</span>
         {SORT_OPTIONS.map((opt) => (
           <button
             key={opt.value}
             onClick={() => handleSort(opt.value)}
-            className={`flex items-center gap-1 px-2.5 py-1 rounded-lg transition-all duration-200 ${
+            className={`flex-shrink-0 flex items-center gap-1 px-2.5 py-1 rounded-lg transition-all duration-200 ${
               filters.sortBy === opt.value
                 ? 'bg-primary-600/20 text-primary-400 border border-primary-500/30'
                 : 'hover:bg-white/10 hover:text-white'
@@ -205,7 +205,7 @@ const TransactionsPage = () => {
             )}
           </button>
         ))}
-        <span className="ml-auto text-white/30">{pagination.total} transactions</span>
+        <span className="ml-auto flex-shrink-0" style={{ color: 'var(--color-text-muted)' }}>{pagination.total} transactions</span>
       </div>
 
       {/* Transactions list */}

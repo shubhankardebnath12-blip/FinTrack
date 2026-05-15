@@ -102,7 +102,7 @@ export const StatCard = ({ title, value, icon: Icon, color = 'primary', subtitle
 
         {/* Value */}
         <p
-          className="text-3xl font-bold text-white mb-1 tracking-tighter"
+          className="text-2xl md:text-3xl font-bold text-white mb-1 tracking-tighter truncate"
           style={{ letterSpacing: '-0.03em', lineHeight: 1 }}
         >
           {value}
